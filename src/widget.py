@@ -1,32 +1,34 @@
 from datetime import datetime
+from masks import get_mask_card_number, get_mask_account
+
 
 
 def mask_account_card(data: str) -> str:
-    """Функция маскировки карты и счета"""
+    """Маскирует данные карты или счета."""
     parts = data.split()
-    name = " ".join(parts[:-1])
     number = parts[-1]
-
-    if not number.isdigit():
-        return "Ошибка, номер должен состоять только из цифр"
-
-    if name.lower().startswith("счет"):
-        if len(number) != 20:
-            return "Номер счета должен содержать 20 цифр"
-        masked_number = f"**{number[-4:]}"
+    name = " ".join(parts[:-1])
+    if "Счет" in name:
+        masked_number = get_mask_account(int(number))
     else:
-        if len(number) != 16:
-            return "Номер карты должен содержать 16 цифр"
-        masked_number = f"{number[:4]} {number[4:6]}** **** {number[-4:]}"
-
+        masked_number = get_mask_card_number(int(number))
     return f"{name.title()} {masked_number}"
 
 
-def get_data(data_string: str) -> str:
-    """Преобразует строку в формат дд.мм.гггг"""
+
+def date_transformation(data_string: str) -> str:
+    """Преобразует строку с датой в формат дд.мм.гггг"""
     try:
         data_iso = data_string[:10]
-        data_obj = datetime.strptime(data_iso, "%Y-%m-%d")
-        return data_obj.strftime("%d.%m.%Y")
+        date_obj = datetime.strptime(data_iso, "%Y-%m-%d")
+        return date_obj.strftime("%d.%m.%Y")
     except ValueError:
-        return "Ошибка: некорректный ввод данных."
+        return "Ошибка: некорректный формат даты."
+
+
+
+if __name__ == "__main__":
+    print(mask_account_card("visa platinum 7000792289606361"))
+    print(mask_account_card("Счет 73654108430135874305"))
+    print(date_transformation("2024-03-11T02:26:18.671407"))
+
