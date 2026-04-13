@@ -16,7 +16,7 @@ def mask_account_card(data: str) -> str:
 
 
 
-def date_transformation(data_string: str) -> str:
+def get_date(data_string: str) -> str:
     """Преобразует строку с датой в формат дд.мм.гггг"""
     try:
         data_iso = data_string[:10]
@@ -30,5 +30,5 @@ def date_transformation(data_string: str) -> str:
 if __name__ == "__main__":
     print(mask_account_card("visa platinum 7000792289606361"))
     print(mask_account_card("Счет 73654108430135874305"))
-    print(date_transformation("2024-03-11T02:26:18.671407"))
+    print(get_date("2024-03-11T02:26:18.671407"))
 
