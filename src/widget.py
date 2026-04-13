@@ -30,13 +30,3 @@ def get_data(data_string: str) -> str:
         return data_obj.strftime("%d.%m.%Y")
     except ValueError:
         return "Ошибка: некорректный ввод данных."
-
-
-
-
-
-
-
-
-
-
