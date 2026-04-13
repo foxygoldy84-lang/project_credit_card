@@ -214,3 +214,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+pyproject.toml
+.flake8
+poetry.lock
+.idea
