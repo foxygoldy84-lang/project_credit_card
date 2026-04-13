@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from black.nodes import Union
 
 
@@ -20,6 +22,16 @@ def mask_account_card(data: str) -> str:
         masked_number = f"**{number[:4] {number[4:6]}** **** {number[-4:]"
                 
 return f"{name.title()} {masked_number}"
+
+
+def get_data(data_string: str) -> str:
+    """Преобразует строку в формат дд.мм.гггг"""
+    try:
+        data_iso = data_string[:10]
+        data_obj = datetime.strptime("%d.%m.%Y")
+        return data_obj.strftime("%d.%m.%Y")
+    except ValueError:
+        return "Ошибка: некорректный ввод данных."
 
 
 
