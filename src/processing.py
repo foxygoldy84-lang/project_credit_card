@@ -1,9 +1,9 @@
 def filter_by_state(data: list[dict], state: str = "EXECUTED") -> str:
     """Функция  возвращает новый список по ключу 'state'"""
     new_state = []
-    for i in data:
-        if i.get("state") == state:
-            new_state.append(i)
+    for item in data:
+        if item.get("state") == state:
+            new_state.append(item)
 
     return new_state
 
