@@ -1,12 +1,15 @@
+from processing import filter_by_state, sort_by_date
+from widget import get_date, mask_account_card
+
+
 def filter_by_state(data, state='EXECUTED') -> str:
-"""Функция  возвращает новый список по ключу 'state'"""
-new_state = []
-for i in data:
-    if i.get('state') == 'state':
-        new_state.append(i)
+    """Функция  возвращает новый список по ключу 'state'"""
+    new_state = []
+    for i in data:
+        if i.get('state') == state:
+            new_state.append(i)
 
-return new_state
-
+    return new_state
 
 
 def sort_by_date(data, reverse=True):
