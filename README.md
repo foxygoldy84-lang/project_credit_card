@@ -22,7 +22,7 @@
 1.  **Клонируйте репозиторий:**
     ```bash
     git clone https://github.com
-    cd название-проекта
+    cd https://github.com/foxygoldy84-lang/project_credit_card.git
     ```
 
 2.  **Установите зависимости через Poetry:**
