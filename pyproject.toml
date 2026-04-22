@@ -20,6 +20,7 @@ dev = [
     "mypy>=1.11.0",
     "isort>=5.13.2",
     "black>=24.8.0",
+    "pytest (>=9.0.3,<10.0.0)",
 ]
 
 [build-system]
