@@ -36,8 +36,8 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
+# Unit tests / coverage reports
+
 .tox/
 .nox/
 .coverage
@@ -215,7 +215,5 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-pyproject.toml
-.flake8
-poetry.lock
+
 .idea
