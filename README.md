@@ -37,3 +37,42 @@
 ```bash pytest --cov=src --cov-report=term-missing
 ```
 
+## Модуль Generators
+
+Модуль содержит набор функций-генераторов для эффективной обработки данных о банковских операциях. Использование генераторов позволяет экономить память, обрабатывая элементы списка по одному.
+
+### Реализованные функции
+
+#### 1. filter_by_currency
+Фильтрует список транзакций по заданному коду валюты.
+- **Вход**: Список словарей с транзакциями, код валюты (напр. "USD").
+- **Выход**: Итератор с подходящими транзакциями.
+
+#### 2. transaction_descriptions
+Извлекает описания из списка транзакций.
+- **Вход**: Список словарей с транзакциями.
+- **Выход**: Итератор со строками описаний.
+
+#### 3. card_number_generator
+Генерирует номера банковских карт в формате `XXXX XXXX XXXX XXXX`.
+- **Вход**: Начальное и конечное число диапазона.
+- **Выход**: Итератор со строковыми номерами карт.
+
+### Примеры использования
+
+```python
+from generators.filter_by_currency import filter_by_currency, transaction_descriptions, card_number_generator
+
+# Фильтрация по валюте
+usd_transactions = filter_by_currency(transactions, "USD")
+print(next(usd_transactions))
+
+# Получение описаний
+descriptions = transaction_descriptions(transactions)
+for _ in range(3):
+    print(next(descriptions))
+
+# Генерация номеров карт
+for card in card_number_generator(1, 5):
+    print(card)
+
