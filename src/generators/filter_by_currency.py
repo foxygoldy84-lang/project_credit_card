@@ -25,4 +25,3 @@ def card_number_generator(start: int, end: int) -> Iterable[str]:
         number_str = f"{number:016}"
         formatted_card = f"{number_str[:4]} {number_str[4:8]} {number_str[8:12]} {number_str[12:16]}"
         yield formatted_card
-

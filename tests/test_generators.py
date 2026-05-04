@@ -1,7 +1,5 @@
-from unittest import expectedFailure
-
 import pytest
-from generators.filter_by_currency import filter_by_currency, transaction_descriptions, card_number_generator
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 # Фикстура с тестовыми данными транзакций (название БЕЗ test_)
 @pytest.fixture
