@@ -1,5 +1,7 @@
 import pytest
+
 from src.masks import get_mask_card_number
+
 
 @pytest.mark.parametrize("card_num, expected", [
     (1234567812345678, "1234 56** **** 5678"),
@@ -8,9 +10,3 @@ from src.masks import get_mask_card_number
 def test_get_mask_card_number(card_num, expected):
     """Тестируем маскировку номера карты"""
     assert get_mask_card_number(card_num) == expected
-
-
-
-
-
-
