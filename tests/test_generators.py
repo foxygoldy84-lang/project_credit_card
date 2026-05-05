@@ -1,7 +1,10 @@
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 # Фикстура с тестовыми данными транзакций (название БЕЗ test_)
+
+
 @pytest.fixture
 def transactions_data():
     return [
@@ -15,6 +18,8 @@ def transactions_data():
     ]
 
 # Тест для filter_by_currency
+
+
 @pytest.mark.parametrize("currency, expected_count", [
     ("USD", 2),
     ("RUB", 1),
@@ -25,12 +30,14 @@ def test_filter_by_currency(transactions_data, currency, expected_count):
     result = list(filter_by_currency(transactions_data, currency))
     assert len(result) == expected_count
 
+
 def test_transaction_descriptions(transactions_data):
     """ Проверка получения описания банковский операций"""
     descriptions = list(transaction_descriptions(transactions_data))
     expected = ["Перевод организации", "Перевод со счета на счет", "Оплата услуг",
                 "Перевод юр. лицам", "Перевод физ. лицам", "Зарплата", "Без описания"]
-    assert descriptions  == expected
+    assert descriptions == expected
+
 
 def test_card_number_generator():
     """ Проверка генерации номеров карт и их формат выпуска. """
@@ -43,10 +50,3 @@ def test_card_number_generator():
 
     with pytest.raises(StopIteration):
         next(gen)
-
-
-
-
-
-
-
