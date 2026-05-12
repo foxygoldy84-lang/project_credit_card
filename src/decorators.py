@@ -1,7 +1,8 @@
 from functools import wraps
 from typing import Any, Callable, Optional
 
-def log(filename: Optional[str]=None)-> Callable[[Callable], Callable]:
+
+def log(filename: Optional[str] = None) -> Callable[[Callable], Callable]:
     """Декоратор, который логирует выполнение функции в файл или консоль."""
 
     def decorator(func: Callable) -> Callable:
@@ -31,6 +32,5 @@ def log(filename: Optional[str]=None)-> Callable[[Callable], Callable]:
                 raise e
 
         return wrapper
+
     return decorator
-
-
