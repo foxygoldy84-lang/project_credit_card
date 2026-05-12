@@ -63,5 +63,5 @@ def test_log_file_error():
         log_content = f.read()
 
     assert "my_function error: ValueError. Inputs: (1, 2), {}" in log_content
-    # os.remove(filename)
+    os.remove(filename)
 
