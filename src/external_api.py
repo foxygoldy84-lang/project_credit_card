@@ -1,6 +1,7 @@
 import os
-import requests
 from typing import Any, Dict
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,6 +30,6 @@ def convert_to_rub(transaction: Dict[str, Any]) -> float:
                 data = response.json()
                 return float(data.get("result", 0.0))
         except requests.RequestException:
-            pass
+            return 0.0
 
     return 0.0
