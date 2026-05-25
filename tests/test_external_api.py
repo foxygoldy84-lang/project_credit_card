@@ -41,4 +41,3 @@ def test_convert_usd_api_failure(mock_get, usd_transaction):
     mock_get.return_value = mock_response
 
     assert convert_to_rub(usd_transaction) == 0.0
-
