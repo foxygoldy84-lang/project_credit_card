@@ -4,8 +4,8 @@ from typing import Any, Dict
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
-API_KEY = os.getenv("API_KEY", "")
+load_dotenv(".env")
+API_KEY = os.getenv("API_KEY")
 
 
 def convert_to_rub(transaction: Dict[str, Any]) -> float:
