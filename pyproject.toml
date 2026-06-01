@@ -9,6 +9,8 @@ requires-python = ">=3.12"
 dependencies = [
     "requests>=2.31.0",
     "python-dotenv (>=1.2.2,<2.0.0)",
+    "pandas (>=3.0.3,<4.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
 ]
 
 [tool.poetry]
@@ -24,6 +26,8 @@ dev = [
     "pytest (>=9.0.3,<10.0.0)",
     "pytest-cov (>=7.1.0,<8.0.0)",
     "pre-commit (>=4.6.0,<5.0.0)",
+    "pandas-stubs (>=3.0.3.260530,<4.0.0.0)",
+    "types-requests (>=2.33.0.20260518,<3.0.0.0)",
 ]
 
 [build-system]
@@ -44,7 +48,7 @@ no_implicit_optional = true
 check_untyped_defs = true
 warn_return_any = true
 warn_unused_ignores = true
-exclude = 'venv'
+exclude = 'venv|tests'
 
 
 
