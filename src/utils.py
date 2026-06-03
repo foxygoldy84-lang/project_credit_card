@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 from typing import Any, Dict, List
 
 import pandas as pd
@@ -108,7 +109,21 @@ def read_transactions_xlsx(file_path: str) -> List[Dict[str, Any]]:
             transactions.append(transaction)
 
         logger.info(f"Excel-файл успешно прочитан. Найдено транзакций: {len(transactions)}")
+
         return transactions
     except Exception as e:
         logger.error(f"Ошибка чтения Excel-файла {file_path}: {e}")
         return []
+
+
+def process_bank_search(data: list[dict], search: str) -> list[dict]:
+    """Фильтрует список банковских операций по строке поиска в описании."""
+    filtered_data = []
+    pattern = re.compile(search, re.IGNORECASE)
+
+    for transaction in data:
+        description = transaction.get("description", "")
+        if pattern.search(description):
+            filtered_data.append(transaction)
+
+    return filtered_data

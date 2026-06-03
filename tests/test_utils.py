@@ -4,7 +4,7 @@ from unittest.mock import mock_open, patch
 import pandas as pd
 import pytest
 
-from src.utils import list_transactions, read_transactions_csv, read_transactions_xlsx
+from src.utils import list_transactions, process_bank_search, read_transactions_csv, read_transactions_xlsx
 
 
 def test_list_transactions_success() -> None:
@@ -99,3 +99,25 @@ def test_read_transactions_xlsx_error() -> None:
     with patch("os.path.exists", return_value=True):
         with patch("pandas.read_excel", side_effect=Exception("Ошибка чтения")):
             assert read_transactions_xlsx("dummy.xlsx") == []
+
+
+def test_process_bank_search():
+    mock_data = [
+        {"id": 1, "description": "Перевод организации"},
+        {"id": 2, "description": "Оплата мобильной связи"},
+        {"id": 3, "description": "Перевод другу"},
+        {"id": 4, "description": ""},
+    ]
+
+    result = process_bank_search(mock_data, "перевод")
+
+    assert len(result) == 2
+    assert result[0]["id"] == 1
+    assert result[1]["id"] == 3
+
+
+def test_process_bank_search_empty_or_no_match():
+    mock_data = [{"id": 1, "description": "Покупка продуктов"}]
+
+    assert process_bank_search(mock_data, "Кредит") == []
+    assert process_bank_search([], "Покупка") == []

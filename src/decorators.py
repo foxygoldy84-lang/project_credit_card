@@ -15,6 +15,7 @@ def log(filename: Optional[str] = None) -> Callable[[Callable], Callable]:
                 if filename:
                     with open(filename, "a", encoding="utf-8") as f:
                         f.write(log_message + "\n")
+
                 else:
                     print(log_message)
 
