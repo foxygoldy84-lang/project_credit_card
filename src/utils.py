@@ -6,7 +6,6 @@ from typing import Any, Dict, List
 
 import pandas as pd
 
-# Создаем папку logs в корне проекта, если её ещё нет
 os.makedirs("logs", exist_ok=True)
 
 # Настройка логера для модуля utils
@@ -127,3 +126,21 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
             filtered_data.append(transaction)
 
     return filtered_data
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """Подсчитывает количество операций в каждой из заданных категорий."""
+    # Извлекаем все описания операций, приводя их к нижнему регистру для надёжности
+    descriptions = [transaction.get("description", "").lower() for transaction in data]
+
+    result = {}
+
+    for category in categories:
+        category_lower = category.lower()
+
+        # Считаем, сколько раз категория встречается как подстрока в описаниях
+        count = sum(1 for desc in descriptions if category_lower in desc)
+
+        result[category] = count
+
+    return result

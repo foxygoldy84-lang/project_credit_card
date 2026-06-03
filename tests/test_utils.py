@@ -1,10 +1,16 @@
 import json
 from unittest.mock import mock_open, patch
 
-import pandas as pd
+import pandas as pd  # noqa: F401
 import pytest
 
-from src.utils import list_transactions, process_bank_search, read_transactions_csv, read_transactions_xlsx
+from src.utils import (
+    list_transactions,
+    process_bank_operations,
+    process_bank_search,
+    read_transactions_csv,
+    read_transactions_xlsx,
+)
 
 
 def test_list_transactions_success() -> None:
@@ -121,3 +127,17 @@ def test_process_bank_search_empty_or_no_match():
 
     assert process_bank_search(mock_data, "Кредит") == []
     assert process_bank_search([], "Покупка") == []
+
+
+def test_process_bank_operations():
+    mock_data = [
+        {"id": 1, "description": "Перевод организации"},
+        {"id": 2, "description": "Оплата мобильной связи"},
+        {"id": 3, "description": "Перевод другу"},
+        {"id": 4, "description": "Покупка продуктов"},
+    ]
+    categories = ["Перевод", "Оплата", "Кредит"]
+
+    result = process_bank_operations(mock_data, categories)
+
+    assert result == {"Перевод": 2, "Оплата": 1, "Кредит": 0}
