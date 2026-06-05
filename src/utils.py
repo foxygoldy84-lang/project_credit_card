@@ -129,7 +129,11 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
 
 
 def process_bank_operations(data: list[dict], categories: list) -> dict:
-    """Подсчитывает количество операций в каждой из заданных категорий."""
+    """
+    :param data:
+    :param categories:
+    :return:
+    """
     # Извлекаем все описания операций, приводя их к нижнему регистру для надёжности
     descriptions = [transaction.get("description", "").lower() for transaction in data]
 
