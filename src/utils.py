@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+from collections import Counter
 from typing import Any, Dict, List
 
 import pandas as pd
@@ -130,20 +131,18 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
 
 def process_bank_operations(data: list[dict], categories: list) -> dict:
     """
-    :param data:
-    :param categories:
-    :return:
+    Подсчитывает количество операций по категориям с использованием Counter.
     """
-    # Извлекаем все описания операций, приводя их к нижнему регистру для надёжности
-    descriptions = [transaction.get("description", "").lower() for transaction in data]
+    # Приводим все описания к нижнему регистру и сразу считаем их частоту
+    descriptions_counter = Counter(transaction.get("description", "").lower() for transaction in data)
 
     result = {}
 
     for category in categories:
         category_lower = category.lower()
 
-        # Считаем, сколько раз категория встречается как подстрока в описаниях
-        count = sum(1 for desc in descriptions if category_lower in desc)
+        # Считаем сумму повторений для описаний, где встречается имя категории
+        count = sum(frequency for desc, frequency in descriptions_counter.items() if category_lower in desc)
 
         result[category] = count
 

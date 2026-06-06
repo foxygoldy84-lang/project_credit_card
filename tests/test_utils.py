@@ -141,3 +141,16 @@ def test_process_bank_operations():
     result = process_bank_operations(mock_data, categories)
 
     assert result == {"Перевод": 2, "Оплата": 1, "Кредит": 0}
+
+
+def test_process_bank_operations_case_insensitive():
+    # Проверяем, что функция не зависит от регистра букв
+    mock_data = [
+        {"id": 1, "description": "ПЕРЕВОД организации"},
+        {"id": 2, "description": "оплата связи"},
+    ]
+    categories = ["перевод", "ОПЛАТА"]
+
+    result = process_bank_operations(mock_data, categories)
+
+    assert result == {"перевод": 1, "ОПЛАТА": 1}
